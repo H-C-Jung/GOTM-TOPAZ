@@ -1,7 +1,7 @@
 # Set options for the Intel Fortran 95 compiler - ver. 8.
 ifeq ($(FORTRAN_COMPILER),IFORT)
 FC=/usr/local/intel/composer_xe_2013_sp1.0.080/bin/intel64/ifort
-MPIF90=/usr/local/mpi/intel/mvapich2-1.4_14/bin/mpif90
+MPIF90=$(MPILIB)/bin/mpif90
 CC=/usr/local/intel/composer_xe_2013_sp1.0.080/bin/intel64/icc
 DEFINES += -DFORTRAN95
 can_do_F90=true
