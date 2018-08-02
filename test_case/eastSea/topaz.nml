@@ -1,0 +1,11 @@
+!$Id$
+!-------------------------------------------------------------------------------
+! Basic settings for TOPAZ biogeochemical model
+!
+!  topaz_calc        -> calculation of the TOPAZ model 'topaz_model' (.true./.false.)
+!  topaz_climchl     -> use climatology chl concentration (.true./.false.)
+!-------------------------------------------------------------------------------
+&topaz_nml
+  topaz_calc=           .true.
+  topaz_climchl=        .false.
+ /
