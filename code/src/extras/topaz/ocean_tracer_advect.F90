@@ -146,7 +146,7 @@ use fms_mod,             only: read_data, field_exist, file_exist
 use fms_io_mod,          only: register_restart_field, save_restart, restore_state
 use fms_io_mod,          only: restart_file_type 
 use mpp_domains_mod,     only: mpp_update_domains, mpp_define_domains, mpp_global_field
-!use mpp_domains_mod,     only: mpp_start_update_domains, mpp_complete_update_domains !!hcjung for serial compile
+use mpp_domains_mod,     only: mpp_start_update_domains, mpp_complete_update_domains
 use mpp_domains_mod,     only: BGRID_NE, CGRID_NE, domain2d, XUPDATE, YUPDATE
 use mpp_domains_mod,     only: mpp_get_domain_components, mpp_get_layout, domain1d, mpp_get_pelist
 use mpp_mod,             only: input_nml_file, mpp_error, FATAL, WARNING, NOTE, stdout, stdlog
@@ -4192,13 +4192,13 @@ subroutine advect_tracer_sweby_all(Time, Adv_vel, Dens, T_prog, Thickness, dtime
      enddo ! end of k-loop
 
      call mpp_clock_begin(id_clock_mdfl_sweby_mpi)
-!     if (async_domain_update) then        !!hcjung for serial compile
-!        id_update(n) = mpp_start_update_domains (tracer_mdfl_all(n)%field(:,:,:), Dom_mdfl%domain2d, &
-!                                                 flags=XUPDATE)
-!     else
-!        id_update(1) = mpp_start_update_domains (tracer_mdfl_all(n)%field(:,:,:), Dom_mdfl%domain2d, &
-!                                                 flags=XUPDATE, complete=T_prog(n)%complete)
-!     endif
+     if (async_domain_update) then        
+        id_update(n) = mpp_start_update_domains (tracer_mdfl_all(n)%field(:,:,:), Dom_mdfl%domain2d, &
+                                                 flags=XUPDATE)
+     else
+        id_update(1) = mpp_start_update_domains (tracer_mdfl_all(n)%field(:,:,:), Dom_mdfl%domain2d, &
+                                                 flags=XUPDATE, complete=T_prog(n)%complete)
+     endif
      call mpp_clock_end(id_clock_mdfl_sweby_mpi)
 
      call mpp_clock_begin(id_clock_mdfl_sweby_dia)
@@ -4213,10 +4213,10 @@ subroutine advect_tracer_sweby_all(Time, Adv_vel, Dens, T_prog, Thickness, dtime
 
   if( .not. async_domain_update) then
      call mpp_clock_begin(id_clock_mdfl_sweby_mpi)
-!     do n=1,num_prog_tracers    !!hcjung for serial compile
-!        call mpp_complete_update_domains (id_update(1), tracer_mdfl_all(n)%field(:,:,:), Dom_mdfl%domain2d, &
-!                                          flags=XUPDATE, complete=T_prog(n)%complete)
-!     enddo
+     do n=1,num_prog_tracers
+        call mpp_complete_update_domains (id_update(1), tracer_mdfl_all(n)%field(:,:,:), Dom_mdfl%domain2d, &
+                                          flags=XUPDATE, complete=T_prog(n)%complete)
+     enddo
      call mpp_clock_end(id_clock_mdfl_sweby_mpi)
   endif
 
@@ -4224,8 +4224,8 @@ subroutine advect_tracer_sweby_all(Time, Adv_vel, Dens, T_prog, Thickness, dtime
   do n=1,num_prog_tracers
      if(async_domain_update) then
         call mpp_clock_begin(id_clock_mdfl_sweby_mpi)
-!        call mpp_complete_update_domains (id_update(n), tracer_mdfl_all(n)%field(:,:,:), Dom_mdfl%domain2d, & !!hcjung for serial compile
-!                                          flags=XUPDATE)
+        call mpp_complete_update_domains (id_update(n), tracer_mdfl_all(n)%field(:,:,:), Dom_mdfl%domain2d, &
+                                          flags=XUPDATE)
         call mpp_clock_end(id_clock_mdfl_sweby_mpi)
      endif
      call mpp_clock_begin(id_clock_mdfl_sweby_cu2)
@@ -4281,13 +4281,13 @@ subroutine advect_tracer_sweby_all(Time, Adv_vel, Dens, T_prog, Thickness, dtime
      call mpp_clock_end(id_clock_mdfl_sweby_cu2)
 
      call mpp_clock_begin(id_clock_mdfl_sweby_mpi)
-!     if (async_domain_update) then  !!hcjung for serial compile
-!        id_update(n) = mpp_start_update_domains (tracer_mdfl_all(n)%field(:,:,:), Dom_mdfl%domain2d, &
-!                                        flags=YUPDATE)
-!     else 
-!        id_update(1) = mpp_start_update_domains (tracer_mdfl_all(n)%field(:,:,:), Dom_mdfl%domain2d, &
-!                                 flags=YUPDATE, complete=T_prog(n)%complete)
-!     endif
+     if (async_domain_update) then
+        id_update(n) = mpp_start_update_domains (tracer_mdfl_all(n)%field(:,:,:), Dom_mdfl%domain2d, &
+                                        flags=YUPDATE)
+     else 
+        id_update(1) = mpp_start_update_domains (tracer_mdfl_all(n)%field(:,:,:), Dom_mdfl%domain2d, &
+                                 flags=YUPDATE, complete=T_prog(n)%complete)
+     endif
      call mpp_clock_end(id_clock_mdfl_sweby_mpi)
 
      call mpp_clock_begin(id_clock_mdfl_sweby_dia)
@@ -4316,10 +4316,10 @@ subroutine advect_tracer_sweby_all(Time, Adv_vel, Dens, T_prog, Thickness, dtime
 
   if(.not. async_domain_update) then
      call mpp_clock_begin(id_clock_mdfl_sweby_mpi)
-!     do n=1,num_prog_tracers  !!hcjung for serial compile
-!        call mpp_complete_update_domains (id_update(1), tracer_mdfl_all(n)%field(:,:,:), Dom_mdfl%domain2d, &
-!                                          flags=YUPDATE, complete=T_prog(n)%complete)
-!     enddo
+     do n=1,num_prog_tracers
+        call mpp_complete_update_domains (id_update(1), tracer_mdfl_all(n)%field(:,:,:), Dom_mdfl%domain2d, &
+                                          flags=YUPDATE, complete=T_prog(n)%complete)
+     enddo
      call mpp_clock_end(id_clock_mdfl_sweby_mpi)
   endif
 
@@ -4329,8 +4329,8 @@ subroutine advect_tracer_sweby_all(Time, Adv_vel, Dens, T_prog, Thickness, dtime
 
      if (async_domain_update) then
         call mpp_clock_begin(id_clock_mdfl_sweby_mpi)
-!        call mpp_complete_update_domains (id_update(n), tracer_mdfl_all(n)%field(:,:,:), Dom_mdfl%domain2d, &  !!hcjung for serial compile
-!                              flags=YUPDATE)
+        call mpp_complete_update_domains (id_update(n), tracer_mdfl_all(n)%field(:,:,:), Dom_mdfl%domain2d, &
+                              flags=YUPDATE)
         call mpp_clock_end(id_clock_mdfl_sweby_mpi)
      endif
 

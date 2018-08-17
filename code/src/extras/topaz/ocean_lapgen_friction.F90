@@ -264,7 +264,7 @@ use constants_mod,    only: pi, radius, epsln, radian
 use diag_manager_mod, only: register_diag_field, register_static_field
 use fms_mod,          only: open_namelist_file, check_nml_error, write_version_number, close_file
 use mpp_domains_mod,  only: mpp_update_domains, BGRID_NE, mpp_global_field
-!use mpp_domains_mod,  only: mpp_start_update_domains, mpp_complete_update_domains hcjung for serial compile
+use mpp_domains_mod,  only: mpp_start_update_domains, mpp_complete_update_domains
 use mpp_mod,          only: input_nml_file, mpp_sum, mpp_pe, mpp_error, mpp_max
 use mpp_mod,          only: FATAL, NOTE, stdout, stdlog
 
@@ -1195,8 +1195,7 @@ subroutine lapgen_friction(Time, Thickness, Adv_vel, Velocity, &
      if( async_domain_update ) then
         if(mod(k,blocksize) == 0 .or. k == nk)   then
            kend(ibl) = k
-           print*,'pass ocean_lapgen_friction.F90 1'
-!           id_update(ibl) = mpp_start_update_domains (stress_B(:,:,:,kstart(ibl):kend(ibl)), Dom%domain2d)  !!hcjung for serial compile
+           id_update(ibl) = mpp_start_update_domains (stress_B(:,:,:,kstart(ibl):kend(ibl)), Dom%domain2d)  
            ibl = ibl+1
            if(ibl<nk) kstart(ibl) = k+1
         endif
@@ -1211,8 +1210,7 @@ subroutine lapgen_friction(Time, Thickness, Adv_vel, Velocity, &
   do k=1,nk
      if( async_domain_update ) then
         if(k == kstart(ibl))   then
-            print*,'pass ocean_lapgen_friction.F90 2'
-!           call mpp_complete_update_domains (id_update(ibl), stress_B(:,:,:,kstart(ibl):kend(ibl)), Dom%domain2d)  !!hcjung for serial compile
+           call mpp_complete_update_domains (id_update(ibl), stress_B(:,:,:,kstart(ibl):kend(ibl)), Dom%domain2d) 
            ibl = ibl+1
         endif
      endif
