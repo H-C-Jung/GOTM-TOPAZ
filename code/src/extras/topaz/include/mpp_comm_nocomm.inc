@@ -21,6 +21,7 @@ subroutine mpp_init( flags,localcomm )
   module_is_initialized = .TRUE.
 
   !PEsets: make defaults illegal
+  allocate(peset(0:current_peset_max)) !!hcjung for serial compile (bug fix)
   peset(:)%count = -1
   peset(:)%id = -1
   peset(:)%group = -1

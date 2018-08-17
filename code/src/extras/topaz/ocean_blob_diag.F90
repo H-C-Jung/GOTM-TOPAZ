@@ -64,7 +64,7 @@ use ocean_types_mod,      only: ocean_grid_type, ocean_domain_type
 implicit none
 
 include 'netcdf.inc'
-include 'mpif.h'
+!include 'mpif.h' !!hcjung 20180817 for serial compile
 
 private
 
