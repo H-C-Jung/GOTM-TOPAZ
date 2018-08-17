@@ -142,7 +142,7 @@ module mpp_domains_mod
   private
 
 #if defined(use_libMPI) && !defined(sgi_mipspro)
-#include <mpif.h>
+#include <mpif.h>  
 !sgi_mipspro gets this from 'use mpi'
 #endif
 
@@ -188,7 +188,7 @@ module mpp_domains_mod
   !--- public interface from mpp_domains_misc.h
   public :: mpp_broadcast_domain, mpp_domains_init, mpp_domains_exit, mpp_redistribute
   public :: mpp_update_domains, mpp_check_field
-  public :: mpp_start_update_domains, mpp_complete_update_domains
+!  public :: mpp_start_update_domains, mpp_complete_update_domains hcjung for serial compile
   public :: mpp_update_nest_fine, mpp_update_nest_coarse
 !  public :: mpp_update_domains_ad   ! bnc
   public :: mpp_get_boundary
@@ -1105,129 +1105,129 @@ module mpp_domains_mod
 
 ! </INTERFACE>
 
-  interface mpp_start_update_domains
-     module procedure mpp_start_update_domain2D_r8_2d
-     module procedure mpp_start_update_domain2D_r8_3d
-     module procedure mpp_start_update_domain2D_r8_4d
-     module procedure mpp_start_update_domain2D_r8_5d
-     module procedure mpp_start_update_domain2D_r8_2dv
-     module procedure mpp_start_update_domain2D_r8_3dv
-     module procedure mpp_start_update_domain2D_r8_4dv
-     module procedure mpp_start_update_domain2D_r8_5dv
-#ifdef OVERLOAD_C8
-     module procedure mpp_start_update_domain2D_c8_2d
-     module procedure mpp_start_update_domain2D_c8_3d
-     module procedure mpp_start_update_domain2D_c8_4d
-     module procedure mpp_start_update_domain2D_c8_5d
-#endif
-#ifndef no_8byte_integers
-     module procedure mpp_start_update_domain2D_i8_2d
-     module procedure mpp_start_update_domain2D_i8_3d
-     module procedure mpp_start_update_domain2D_i8_4d
-     module procedure mpp_start_update_domain2D_i8_5d
-#endif
-#ifdef OVERLOAD_R4
-     module procedure mpp_start_update_domain2D_r4_2d
-     module procedure mpp_start_update_domain2D_r4_3d
-     module procedure mpp_start_update_domain2D_r4_4d
-     module procedure mpp_start_update_domain2D_r4_5d
-     module procedure mpp_start_update_domain2D_r4_2dv
-     module procedure mpp_start_update_domain2D_r4_3dv
-     module procedure mpp_start_update_domain2D_r4_4dv
-     module procedure mpp_start_update_domain2D_r4_5dv
-#endif
-#ifdef OVERLOAD_C4
-     module procedure mpp_start_update_domain2D_c4_2d
-     module procedure mpp_start_update_domain2D_c4_3d
-     module procedure mpp_start_update_domain2D_c4_4d
-     module procedure mpp_start_update_domain2D_c4_5d
-#endif
-     module procedure mpp_start_update_domain2D_i4_2d
-     module procedure mpp_start_update_domain2D_i4_3d
-     module procedure mpp_start_update_domain2D_i4_4d
-     module procedure mpp_start_update_domain2D_i4_5d
-  end interface
+!  interface mpp_start_update_domains !!hcjung for serial compile
+!     module procedure mpp_start_update_domain2D_r8_2d
+!     module procedure mpp_start_update_domain2D_r8_3d
+!     module procedure mpp_start_update_domain2D_r8_4d
+!     module procedure mpp_start_update_domain2D_r8_5d
+!     module procedure mpp_start_update_domain2D_r8_2dv
+!     module procedure mpp_start_update_domain2D_r8_3dv
+!     module procedure mpp_start_update_domain2D_r8_4dv
+!     module procedure mpp_start_update_domain2D_r8_5dv
+!#ifdef OVERLOAD_C8
+!     module procedure mpp_start_update_domain2D_c8_2d
+!     module procedure mpp_start_update_domain2D_c8_3d
+!     module procedure mpp_start_update_domain2D_c8_4d
+!     module procedure mpp_start_update_domain2D_c8_5d
+!#endif
+!#ifndef no_8byte_integers
+!     module procedure mpp_start_update_domain2D_i8_2d
+!     module procedure mpp_start_update_domain2D_i8_3d
+!     module procedure mpp_start_update_domain2D_i8_4d
+!     module procedure mpp_start_update_domain2D_i8_5d
+!#endif
+!#ifdef OVERLOAD_R4
+!     module procedure mpp_start_update_domain2D_r4_2d
+!     module procedure mpp_start_update_domain2D_r4_3d
+!     module procedure mpp_start_update_domain2D_r4_4d
+!     module procedure mpp_start_update_domain2D_r4_5d
+!     module procedure mpp_start_update_domain2D_r4_2dv
+!     module procedure mpp_start_update_domain2D_r4_3dv
+!     module procedure mpp_start_update_domain2D_r4_4dv
+!     module procedure mpp_start_update_domain2D_r4_5dv
+!#endif
+!#ifdef OVERLOAD_C4
+!     module procedure mpp_start_update_domain2D_c4_2d
+!     module procedure mpp_start_update_domain2D_c4_3d
+!     module procedure mpp_start_update_domain2D_c4_4d
+!     module procedure mpp_start_update_domain2D_c4_5d
+!#endif
+!     module procedure mpp_start_update_domain2D_i4_2d
+!     module procedure mpp_start_update_domain2D_i4_3d
+!     module procedure mpp_start_update_domain2D_i4_4d
+!     module procedure mpp_start_update_domain2D_i4_5d
+!!  end interface
 
-  interface mpp_complete_update_domains
-     module procedure mpp_complete_update_domain2D_r8_2d
-     module procedure mpp_complete_update_domain2D_r8_3d
-     module procedure mpp_complete_update_domain2D_r8_4d
-     module procedure mpp_complete_update_domain2D_r8_5d
-     module procedure mpp_complete_update_domain2D_r8_2dv
-     module procedure mpp_complete_update_domain2D_r8_3dv
-     module procedure mpp_complete_update_domain2D_r8_4dv
-     module procedure mpp_complete_update_domain2D_r8_5dv
-#ifdef OVERLOAD_C8
-     module procedure mpp_complete_update_domain2D_c8_2d
-     module procedure mpp_complete_update_domain2D_c8_3d
-     module procedure mpp_complete_update_domain2D_c8_4d
-     module procedure mpp_complete_update_domain2D_c8_5d
-#endif
-#ifndef no_8byte_integers
-     module procedure mpp_complete_update_domain2D_i8_2d
-     module procedure mpp_complete_update_domain2D_i8_3d
-     module procedure mpp_complete_update_domain2D_i8_4d
-     module procedure mpp_complete_update_domain2D_i8_5d
-#endif
-#ifdef OVERLOAD_R4
-     module procedure mpp_complete_update_domain2D_r4_2d
-     module procedure mpp_complete_update_domain2D_r4_3d
-     module procedure mpp_complete_update_domain2D_r4_4d
-     module procedure mpp_complete_update_domain2D_r4_5d
-     module procedure mpp_complete_update_domain2D_r4_2dv
-     module procedure mpp_complete_update_domain2D_r4_3dv
-     module procedure mpp_complete_update_domain2D_r4_4dv
-     module procedure mpp_complete_update_domain2D_r4_5dv
-#endif
-#ifdef OVERLOAD_C4
-     module procedure mpp_complete_update_domain2D_c4_2d
-     module procedure mpp_complete_update_domain2D_c4_3d
-     module procedure mpp_complete_update_domain2D_c4_4d
-     module procedure mpp_complete_update_domain2D_c4_5d
-#endif
-     module procedure mpp_complete_update_domain2D_i4_2d
-     module procedure mpp_complete_update_domain2D_i4_3d
-     module procedure mpp_complete_update_domain2D_i4_4d
-     module procedure mpp_complete_update_domain2D_i4_5d
-  end interface
+!  interface mpp_complete_update_domains
+!     module procedure mpp_complete_update_domain2D_r8_2d
+!     module procedure mpp_complete_update_domain2D_r8_3d
+!     module procedure mpp_complete_update_domain2D_r8_4d
+!     module procedure mpp_complete_update_domain2D_r8_5d
+!     module procedure mpp_complete_update_domain2D_r8_2dv
+!     module procedure mpp_complete_update_domain2D_r8_3dv
+!     module procedure mpp_complete_update_domain2D_r8_4dv
+!     module procedure mpp_complete_update_domain2D_r8_5dv
+!#ifdef OVERLOAD_C8
+!     module procedure mpp_complete_update_domain2D_c8_2d
+!     module procedure mpp_complete_update_domain2D_c8_3d
+!     module procedure mpp_complete_update_domain2D_c8_4d
+!     module procedure mpp_complete_update_domain2D_c8_5d
+!#endif
+!#ifndef no_8byte_integers
+!     module procedure mpp_complete_update_domain2D_i8_2d
+!     module procedure mpp_complete_update_domain2D_i8_3d
+!     module procedure mpp_complete_update_domain2D_i8_4d
+!     module procedure mpp_complete_update_domain2D_i8_5d
+!#endif
+!#ifdef OVERLOAD_R4
+!     module procedure mpp_complete_update_domain2D_r4_2d
+!     module procedure mpp_complete_update_domain2D_r4_3d
+!     module procedure mpp_complete_update_domain2D_r4_4d
+!     module procedure mpp_complete_update_domain2D_r4_5d
+!     module procedure mpp_complete_update_domain2D_r4_2dv
+!     module procedure mpp_complete_update_domain2D_r4_3dv
+!     module procedure mpp_complete_update_domain2D_r4_4dv
+!     module procedure mpp_complete_update_domain2D_r4_5dv
+!#endif
+!#ifdef OVERLOAD_C4
+!     module procedure mpp_complete_update_domain2D_c4_2d
+!     module procedure mpp_complete_update_domain2D_c4_3d
+!     module procedure mpp_complete_update_domain2D_c4_4d
+!     module procedure mpp_complete_update_domain2D_c4_5d
+!#endif
+!     module procedure mpp_complete_update_domain2D_i4_2d
+!     module procedure mpp_complete_update_domain2D_i4_3d
+!     module procedure mpp_complete_update_domain2D_i4_4d
+!     module procedure mpp_complete_update_domain2D_i4_5d
+!  end interface
 
-  interface mpp_start_do_update
-     module procedure mpp_start_do_update_r8_3d
-     module procedure mpp_start_do_update_r8_3dv
-#ifdef OVERLOAD_C8
-     module procedure mpp_start_do_update_c8_3d
-#endif
-#ifndef no_8byte_integers
-     module procedure mpp_start_do_update_i8_3d
-#endif
-#ifdef OVERLOAD_R4
-     module procedure mpp_start_do_update_r4_3d
-     module procedure mpp_start_do_update_r4_3dv
-#endif
-#ifdef OVERLOAD_C4
-     module procedure mpp_start_do_update_c4_3d
-#endif
-     module procedure mpp_start_do_update_i4_3d
-  end interface
+!  interface mpp_start_do_update   hcjung 20180817 for serial compile
+!     module procedure mpp_start_do_update_r8_3d
+!     module procedure mpp_start_do_update_r8_3dv
+!#ifdef OVERLOAD_C8
+!     module procedure mpp_start_do_update_c8_3d
+!#endif
+!#ifndef no_8byte_integers
+!     module procedure mpp_start_do_update_i8_3d
+!#endif
+!#ifdef OVERLOAD_R4
+!     module procedure mpp_start_do_update_r4_3d
+!     module procedure mpp_start_do_update_r4_3dv
+!#endif
+!#ifdef OVERLOAD_C4
+!     module procedure mpp_start_do_update_c4_3d
+!#endif
+!     module procedure mpp_start_do_update_i4_3d
+!  end interface
 
-  interface mpp_complete_do_update
-     module procedure mpp_complete_do_update_r8_3d
-     module procedure mpp_complete_do_update_r8_3dv
-#ifdef OVERLOAD_C8
-     module procedure mpp_complete_do_update_c8_3d
-#endif
-#ifndef no_8byte_integers
-     module procedure mpp_complete_do_update_i8_3d
-#endif
-#ifdef OVERLOAD_R4
-     module procedure mpp_complete_do_update_r4_3d
-     module procedure mpp_complete_do_update_r4_3dv
-#endif
-#ifdef OVERLOAD_C4
-     module procedure mpp_complete_do_update_c4_3d
-#endif
-     module procedure mpp_complete_do_update_i4_3d
-  end interface
+!  interface mpp_complete_do_update  hcjung 20180817 for serial compile
+!     module procedure mpp_complete_do_update_r8_3d
+!     module procedure mpp_complete_do_update_r8_3dv
+!#ifdef OVERLOAD_C8
+!     module procedure mpp_complete_do_update_c8_3d
+!#endif
+!#ifndef no_8byte_integers
+!     module procedure mpp_complete_do_update_i8_3d
+!#endif
+!#ifdef OVERLOAD_R4
+!     module procedure mpp_complete_do_update_r4_3d
+!     module procedure mpp_complete_do_update_r4_3dv
+!#endif
+!#ifdef OVERLOAD_C4
+!     module procedure mpp_complete_do_update_c4_3d
+!#endif
+!     module procedure mpp_complete_do_update_i4_3d
+!  end interface
 
   ! <INTERFACE NAME="mpp_define_nest_domains">
   !   <OVERVIEW>

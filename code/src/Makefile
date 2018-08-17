@@ -29,7 +29,7 @@ all: ../VERSION $(EXEC)
 	$(MAKE) -C ..
 
 $(EXEC): makedirs subdirs features gotmlib 
-	$(MPIF90) -o $@ ./gotm/main.o $(LDFLAGS) -lgotm$(buildtype) $(ALL_LIBS)
+	$(FC) -o $@ ./gotm/main.o $(LDFLAGS) -lgotm$(buildtype) $(ALL_LIBS)
 	$(RM) ./gotm/main.o
 
 makedirs:

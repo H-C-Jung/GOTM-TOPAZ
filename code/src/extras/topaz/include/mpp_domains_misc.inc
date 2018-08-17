@@ -901,7 +901,7 @@ end subroutine init_nonblock_type
 #undef MPP_COMPLETE_UPDATE_DOMAINS_5D_V_
 #define MPP_COMPLETE_UPDATE_DOMAINS_5D_V_ mpp_complete_update_domain2D_r8_5Dv
 #endif
-#include <mpp_update_domains2D_nonblock.h>
+!#include <mpp_update_domains2D_nonblock.h> !!hcjung for serial compile
 
 #ifdef OVERLOAD_C8
 #undef  VECTOR_FIELD_
@@ -923,7 +923,7 @@ end subroutine init_nonblock_type
 #define MPP_COMPLETE_UPDATE_DOMAINS_4D_ mpp_complete_update_domain2D_c8_4D
 #undef MPP_COMPLETE_UPDATE_DOMAINS_5D_
 #define MPP_COMPLETE_UPDATE_DOMAINS_5D_ mpp_complete_update_domain2D_c8_5D
-#include <mpp_update_domains2D_nonblock.h>
+!#include <mpp_update_domains2D_nonblock.h>  !!hcjung for serial compile
 #endif
 
 #ifndef no_8byte_integers
@@ -946,7 +946,7 @@ end subroutine init_nonblock_type
 #define MPP_COMPLETE_UPDATE_DOMAINS_4D_ mpp_complete_update_domain2D_i8_4D
 #undef MPP_COMPLETE_UPDATE_DOMAINS_5D_
 #define MPP_COMPLETE_UPDATE_DOMAINS_5D_ mpp_complete_update_domain2D_i8_5D
-#include <mpp_update_domains2D_nonblock.h>
+!#include <mpp_update_domains2D_nonblock.h>  !!hcjung for serial compile
 #endif
 
 #ifdef OVERLOAD_R4
@@ -988,7 +988,7 @@ end subroutine init_nonblock_type
 #undef MPP_COMPLETE_UPDATE_DOMAINS_5D_V_
 #define MPP_COMPLETE_UPDATE_DOMAINS_5D_V_ mpp_complete_update_domain2D_r4_5Dv
 #endif
-#include <mpp_update_domains2D_nonblock.h>
+!#include <mpp_update_domains2D_nonblock.h>  !!hcjung for serial compile
 #endif
 
 #ifdef OVERLOAD_C4
@@ -1011,7 +1011,7 @@ end subroutine init_nonblock_type
 #define MPP_COMPLETE_UPDATE_DOMAINS_4D_ mpp_complete_update_domain2D_c4_4D
 #undef MPP_COMPLETE_UPDATE_DOMAINS_5D_
 #define MPP_COMPLETE_UPDATE_DOMAINS_5D_ mpp_complete_update_domain2D_c4_5D
-#include <mpp_update_domains2D_nonblock.h>
+!#include <mpp_update_domains2D_nonblock.h>   !!hcjung for serial compile
 #endif
 
 #undef VECTOR_FIELD_
@@ -1033,7 +1033,7 @@ end subroutine init_nonblock_type
 #define MPP_COMPLETE_UPDATE_DOMAINS_4D_ mpp_complete_update_domain2D_i4_4D
 #undef MPP_COMPLETE_UPDATE_DOMAINS_5D_
 #define MPP_COMPLETE_UPDATE_DOMAINS_5D_ mpp_complete_update_domain2D_i4_5D
-#include <mpp_update_domains2D_nonblock.h>
+!#include <mpp_update_domains2D_nonblock.h>  !!hcjung for serial compile
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 !                                                                   !
@@ -1054,8 +1054,8 @@ end subroutine init_nonblock_type
 #define MPP_START_DO_UPDATE_3D_V_ mpp_start_do_update_r8_3Dv
 #undef MPP_COMPLETE_DO_UPDATE_3D_V_
 #define MPP_COMPLETE_DO_UPDATE_3D_V_ mpp_complete_do_update_r8_3Dv
-#include <mpp_do_update_nonblock.h>
-#include <mpp_do_updateV_nonblock.h>
+!#include <mpp_do_update_nonblock.h> !!hcjung for serial compile
+!#include <mpp_do_updateV_nonblock.h> !!hcjung for serial compile
 
 #ifdef OVERLOAD_C8
 #undef MPP_TYPE_
@@ -1066,7 +1066,7 @@ end subroutine init_nonblock_type
 #define MPP_START_DO_UPDATE_3D_ mpp_start_do_update_c8_3D
 #undef MPP_COMPLETE_DO_UPDATE_3D_
 #define MPP_COMPLETE_DO_UPDATE_3D_ mpp_complete_do_update_c8_3D
-#include <mpp_do_update_nonblock.h>
+!#include <mpp_do_update_nonblock.h> !!hcjung for serial compile
 #endif
 
 #ifndef no_8byte_integers
@@ -1078,7 +1078,7 @@ end subroutine init_nonblock_type
 #define MPP_START_DO_UPDATE_3D_ mpp_start_do_update_i8_3D
 #undef MPP_COMPLETE_DO_UPDATE_3D_
 #define MPP_COMPLETE_DO_UPDATE_3D_ mpp_complete_do_update_i8_3D
-#include <mpp_do_update_nonblock.h>
+!#include <mpp_do_update_nonblock.h> !!hcjung for serial compile
 #endif
 
 #ifdef OVERLOAD_R4
@@ -1094,8 +1094,8 @@ end subroutine init_nonblock_type
 #define MPP_START_DO_UPDATE_3D_V_ mpp_start_do_update_r4_3Dv
 #undef MPP_COMPLETE_DO_UPDATE_3D_V_
 #define MPP_COMPLETE_DO_UPDATE_3D_V_ mpp_complete_do_update_r4_3Dv
-#include <mpp_do_update_nonblock.h>
-#include <mpp_do_updateV_nonblock.h>
+!#include <mpp_do_update_nonblock.h> !!hcjung for serial compile
+!#include <mpp_do_updateV_nonblock.h> !!hcjung for serial compile
 #endif
 
 #ifdef OVERLOAD_C4
@@ -1107,7 +1107,7 @@ end subroutine init_nonblock_type
 #define MPP_START_DO_UPDATE_3D_ mpp_start_do_update_c4_3D
 #undef MPP_COMPLETE_DO_UPDATE_3D_
 #define MPP_COMPLETE_DO_UPDATE_3D_ mpp_complete_do_update_c4_3D
-#include <mpp_do_update_nonblock.h>
+!#include <mpp_do_update_nonblock.h> !!hcjung for serial compile
 #endif
 
 #undef MPP_TYPE_
@@ -1118,7 +1118,7 @@ end subroutine init_nonblock_type
 #define MPP_START_DO_UPDATE_3D_ mpp_start_do_update_i4_3D
 #undef MPP_COMPLETE_DO_UPDATE_3D_
 #define MPP_COMPLETE_DO_UPDATE_3D_ mpp_complete_do_update_i4_3D
-#include <mpp_do_update_nonblock.h>
+!#include <mpp_do_update_nonblock.h> !!hcjung for serial compile
 
 !*******************************************************
 #undef VECTOR_FIELD_
