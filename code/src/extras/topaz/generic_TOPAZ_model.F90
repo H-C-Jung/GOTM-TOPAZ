@@ -256,6 +256,16 @@
 
       T_prog_num=0
       do n= 1, num_prog_tracers
+
+          if (T_prog(n)%name == 'temp') then
+            index_temp = n
+            cycle
+          end if
+          if (T_prog(n)%name == 'salt') then
+            index_salt = n
+            cycle
+          end if
+
           get_4dvar=0.0 
           CALL GET_VAR4D(T_prog(n)%name, get_4dvar)
 
@@ -264,23 +274,32 @@
 
           if (allocated(T_prog(n)%stf)) deallocate(T_prog(n)%stf);allocate(T_prog(n)%stf(isd:ied,jsd:jed)); T_prog(n)%stf=0.0
           if (allocated(T_prog(n)%th_tendency))deallocate(T_prog(n)%th_tendency);allocate(T_prog(n)%th_tendency(isd:ied,jsd:jed,nk));T_prog(n)%th_tendency=0.0
-          if (T_prog(n)%name == 'temp') index_temp = n
-          if (T_prog(n)%name == 'salt') index_salt = n
 
           T_prog_num=T_prog_num+1
       enddo
 
       T_diag_num=0
       do n= 1, num_diag_tracers
+      
+         if (T_diag(n)%name == 'con_temp') then
+           index_con_temp = n
+           cycle
+         end if
+         if (T_diag(n)%name == 'frazil') then
+           index_frazil = n
+           cycle
+         end if
+         if (T_diag(n)%name == 'irr' ) then
+           index_irr = n
+           cycle
+         end if
+
          get_4dvar=0.0
          CALL GET_VAR4D(T_diag(n)%name, get_4dvar)
 
          deallocate(T_diag(n)%field);allocate(T_diag(n)%field(isd:ied,jsd:jed,nk));T_diag(n)%field=0.0
          T_diag(n)%field(isc:iec,jsc:jec,:)=get_4dvar(isc:iec,jsc:jec,:,1)
 
-         if (T_diag(n)%name == 'con_temp') index_con_temp = n
-         if (T_diag(n)%name == 'frazil') index_frazil = n
-         if (T_diag(n)%name == 'irr' ) index_irr = n
          T_diag_num=T_diag_num+1
       enddo
 
