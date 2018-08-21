@@ -254,7 +254,7 @@
       nc_fname=TRIM('./INPUT/'//'ocean_topaz_column.res.nc')
       call NF_OPEN
 
-      T_prog_num=0
+      T_prog_num=2 !!+temp, salt
       do n= 1, num_prog_tracers
 
           if (T_prog(n)%name == 'temp') then
@@ -278,7 +278,7 @@
           T_prog_num=T_prog_num+1
       enddo
 
-      T_diag_num=0
+      T_diag_num=3 !!+con_temp, frazil, irr
       do n= 1, num_diag_tracers
       
          if (T_diag(n)%name == 'con_temp') then
